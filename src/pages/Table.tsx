@@ -9,6 +9,8 @@ import ViewContact from "./ViewContact";
 import { deleteContact, getAllContacts } from "../utils/endpoints/contactsEndpoints";
 import { useNavigate } from "react-router-dom";
 import { emmitContactDetails } from "../utils/emmitters/rxjsServices";
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Table = () => {
 
@@ -60,8 +62,27 @@ export const Table = () => {
             setContacts(response?.contacts);
         }).catch((err: any) => {
             console.error("err>>", err);
-        })
+        });
+        
+        authenticateUsers();
     }, [])
+
+    function authenticateUsers(){
+        if(localStorage.getItem("userDetails") === null){
+            toast.error("Only loggin users can assess this platform!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+            setTimeout(() => navigate('/login'), 2000);
+        }
+    }
 
 
     return (

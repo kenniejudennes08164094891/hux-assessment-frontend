@@ -24,7 +24,7 @@ export function Header({details}:any) {
             theme: "light",
             transition: Bounce,
         });
-        setTimeout(() =>  navigate('/'), 2000)
+        setTimeout(() =>  navigate('/login'), 2000)
     }).catch((err:any) => {
         console.error("err>>", err);
         toast.error("Oops an error occored!", {
